@@ -13,48 +13,48 @@
            strawberry cream, cocoa dust, fondant & frosting.
            ══════════════════════════════════════════════ */
         :root {
-            /* Aged Linen Canvas (much softer on eyes) */
-            --sponge:           #E6DDD3;
-            --sponge-deep:      #DDD2C6;
-            --buttercream:      #EBE5DC;
-            --frosting:         rgba(230, 221, 211, 0.65);
+            /* Luxury Dark Velvet Espresso Canvas */
+            --sponge:           #0C0908;
+            --sponge-deep:      #140F0D;
+            --buttercream:      #1A1310;
+            --frosting:         rgba(24, 18, 15, 0.78);
 
-            /* Cake Accents (richer, less glare) */
-            --caramel:          #A87530;
-            --caramel-dark:     #8C5F22;
-            --caramel-glow:     rgba(168, 117, 48, 0.08);
-            --caramel-border:   rgba(168, 117, 48, 0.18);
-            --strawberry:       #BA7A88;
-            --strawberry-soft:  rgba(186, 122, 136, 0.08);
-            --strawberry-glow:  rgba(186, 122, 136, 0.1);
-            --raspberry:        #A05568;
-            --chocolate:        #2A1810;
-            --chocolate-milk:   #54392E;
-            --cocoa-dust:       #7A6050;
-            --fondant:          #D8CCBE;
-            --macaron:          #D0C3B4;
+            /* Champagne Gold & Warm Accents */
+            --caramel:          #E5C07B;
+            --caramel-dark:     #C9A054;
+            --caramel-glow:     rgba(229, 192, 123, 0.12);
+            --caramel-border:   rgba(229, 192, 123, 0.22);
+            --strawberry:       #E28D9E;
+            --strawberry-soft:  rgba(226, 141, 158, 0.12);
+            --strawberry-glow:  rgba(226, 141, 158, 0.2);
+            --raspberry:        #C7657C;
+            --chocolate:        #FAF6F0;
+            --chocolate-milk:   #C9BAB0;
+            --cocoa-dust:       #9E8E82;
+            --fondant:          #1E1612;
+            --macaron:          #261D18;
 
-            /* Ambient Lighting (barely there) */
-            --glow-caramel:     rgba(200, 170, 120, 0.08);
-            --glow-strawberry:  rgba(186, 122, 136, 0.06);
-            --glow-vanilla:     rgba(220, 205, 178, 0.08);
+            /* Ambient Glows (subtle warmth) */
+            --glow-caramel:     rgba(229, 192, 123, 0.04);
+            --glow-strawberry:  rgba(226, 141, 158, 0.03);
+            --glow-vanilla:     rgba(200, 160, 110, 0.03);
 
-            /* Shadows — Soft Baked Feel */
+            /* Shadows — Deep Tactile Luxury */
             --shadow-card:
-                0 4px 8px -2px rgba(42, 24, 16, 0.04),
-                0 12px 28px -6px rgba(42, 24, 16, 0.08),
-                0 28px 56px -14px rgba(42, 24, 16, 0.06);
+                0 4px 12px -2px rgba(0, 0, 0, 0.4),
+                0 16px 36px -6px rgba(0, 0, 0, 0.5),
+                0 32px 64px -12px rgba(0, 0, 0, 0.6);
             --shadow-elevated:
-                0 8px 16px -2px rgba(42, 24, 16, 0.06),
-                0 24px 48px -8px rgba(42, 24, 16, 0.1),
-                0 40px 80px -16px rgba(42, 24, 16, 0.07);
+                0 8px 24px -2px rgba(0, 0, 0, 0.5),
+                0 28px 56px -8px rgba(0, 0, 0, 0.6),
+                0 48px 96px -16px rgba(0, 0, 0, 0.7);
             --shadow-macaron:
-                3px 3px 8px rgba(140, 115, 95, 0.2),
-                -3px -3px 8px rgba(240, 235, 228, 0.6),
-                inset 0 1px 2px rgba(240, 235, 228, 0.5);
+                2px 2px 8px rgba(0, 0, 0, 0.6),
+                -2px -2px 6px rgba(255, 255, 255, 0.03),
+                inset 0 1px 1px rgba(229, 192, 123, 0.15);
             --shadow-drizzle:
-                0 8px 24px -4px rgba(42, 24, 16, 0.12),
-                0 30px 60px -12px rgba(42, 24, 16, 0.15);
+                0 12px 32px -4px rgba(0, 0, 0, 0.6),
+                0 36px 72px -12px rgba(0, 0, 0, 0.7);
 
             /* Typography */
             --font-display: 'Playfair Display', 'Georgia', serif;
@@ -75,13 +75,13 @@
         .cursor-cake {
             width: 30px; height: 30px; position: fixed; pointer-events: none; z-index: 9999;
             transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4943A' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8'/%3E%3Cpath d='M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1'/%3E%3Cpath d='M2 21h20'/%3E%3Cpath d='M7 8v2'/%3E%3Cpath d='M12 8v2'/%3E%3Cpath d='M17 8v2'/%3E%3Cpath d='M7 4h.01'/%3E%3Cpath d='M12 4h.01'/%3E%3Cpath d='M17 4h.01'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E5C07B' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8'/%3E%3Cpath d='M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1'/%3E%3Cpath d='M2 21h20'/%3E%3Cpath d='M7 8v2'/%3E%3Cpath d='M12 8v2'/%3E%3Cpath d='M17 8v2'/%3E%3Cpath d='M7 4h.01'/%3E%3Cpath d='M12 4h.01'/%3E%3Cpath d='M17 4h.01'/%3E%3C/svg%3E");
             background-size: contain; background-repeat: no-repeat;
-            filter: drop-shadow(0 2px 6px rgba(42, 24, 16, 0.25));
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
         }
         .cursor-ring {
             width: 44px; height: 44px;
-            border: 1.5px solid rgba(232, 160, 176, 0.5);
+            border: 1.5px solid rgba(229, 192, 123, 0.45);
             position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
@@ -103,17 +103,20 @@
             position: relative;
         }
 
-        /* Sprinkle Pattern Overlay */
+        /* Subtle Luxury Grain */
         body::before {
             content: '';
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            opacity: 0.018;
+            opacity: 0.025;
             mix-blend-mode: soft-light;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-width='1.5' opacity='0.8'%3E%3Cline x1='8' y1='5' x2='12' y2='9' stroke='%23D4943A'/%3E%3Cline x1='45' y1='12' x2='49' y2='8' stroke='%23E8A0B0'/%3E%3Cline x1='25' y1='35' x2='29' y2='39' stroke='%23D4728C'/%3E%3Cline x1='50' y1='45' x2='54' y2='41' stroke='%23D4943A'/%3E%3Cline x1='15' y1='50' x2='11' y2='54' stroke='%23A07B64'/%3E%3Ccircle cx='35' cy='8' r='1.5' fill='%23E8A0B0'/%3E%3Ccircle cx='5' cy='28' r='1' fill='%23D4943A'/%3E%3Ccircle cx='55' cy='30' r='1.2' fill='%23D4728C'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-width='1.5' opacity='0.8'%3E%3Cline x1='8' y1='5' x2='12' y2='9' stroke='%23E5C07B'/%3E%3Cline x1='45' y1='12' x2='49' y2='8' stroke='%23E28D9E'/%3E%3Cline x1='25' y1='35' x2='29' y2='39' stroke='%23E5C07B'/%3E%3Cline x1='50' y1='45' x2='54' y2='41' stroke='%23C9A054'/%3E%3Ccircle cx='35' cy='8' r='1.2' fill='%23E28D9E'/%3E%3Ccircle cx='5' cy='28' r='1' fill='%23E5C07B'/%3E%3C/g%3E%3C/svg%3E");
         }
 
-        /* Ambient Softness (no shining or moving lights) */
-        .glow { display: none; }
+        /* Ambient Softness (very gentle warm glow) */
+        .glow { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px); }
+        .glow-1 { width: 600px; height: 600px; top: -200px; right: -150px; background: var(--glow-caramel); }
+        .glow-2 { width: 500px; height: 500px; bottom: 15%; left: -150px; background: var(--glow-strawberry); }
+        .glow-3 { width: 400px; height: 400px; top: 45%; left: 40%; background: var(--glow-vanilla); }
 
         .content-layer { position: relative; z-index: 1; }
 
@@ -151,10 +154,10 @@
         }
         .navbar.scrolled {
             padding: 1rem 5%;
-            background: rgba(230, 221, 211, 0.88);
+            background: rgba(12, 9, 8, 0.92);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--caramel-border);
-            box-shadow: 0 4px 30px rgba(42, 24, 16, 0.06);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
         .nav-logo { font-family: var(--font-display); font-size: 2rem; color: var(--chocolate); text-decoration: none; letter-spacing: 4px; font-weight: 500; }
         .nav-links { display: flex; gap: 3rem; list-style: none; }
@@ -163,7 +166,7 @@
             font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
             transition: color 0.3s ease; position: relative;
         }
-        .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--strawberry); border-radius: 2px; transition: width 0.4s var(--ease-cake); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: var(--caramel); border-radius: 2px; transition: width 0.4s var(--ease-cake); }
         .nav-links a:hover { color: var(--caramel); }
         .nav-links a:hover::after { width: 100%; }
 
@@ -175,7 +178,7 @@
             padding: 1.1rem 2.8rem;
             font-family: var(--font-accent); font-size: 0.78rem; letter-spacing: 4px;
             text-transform: uppercase; text-decoration: none; cursor: pointer;
-            color: var(--chocolate); background: linear-gradient(145deg, var(--buttercream), var(--fondant));
+            color: var(--chocolate); background: linear-gradient(145deg, #1C1410, #130D0B);
             border: 1px solid var(--caramel-border); border-radius: 100px;
             box-shadow: var(--shadow-macaron);
             transition: all 0.5s var(--ease-cake);
@@ -183,29 +186,36 @@
         }
         .btn-macaron::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(232, 160, 176, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(229, 192, 123, 0.15), transparent);
             transition: left 0.7s var(--ease-cake);
         }
         .btn-macaron:hover {
             transform: translateY(-3px);
-            border-color: var(--strawberry);
-            box-shadow: 3px 3px 10px rgba(160, 123, 100, 0.25), -3px -3px 10px rgba(255, 255, 255, 0.9), 0 12px 30px var(--strawberry-soft);
+            border-color: var(--caramel);
+            color: var(--caramel);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 192, 123, 0.15);
         }
         .btn-macaron:hover::before { left: 100%; }
 
         .btn-strawberry {
-            background: linear-gradient(135deg, var(--strawberry), var(--raspberry));
-            color: #fff; border: none;
-            box-shadow: 0 4px 18px rgba(212, 114, 140, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            background: linear-gradient(135deg, #A84860, #803044);
+            color: #FAF6F0; border: 1px solid rgba(226, 141, 158, 0.3);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
         }
-        .btn-strawberry:hover { box-shadow: 0 10px 30px rgba(212, 114, 140, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3); }
+        .btn-strawberry:hover {
+            border-color: var(--strawberry);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(168, 72, 96, 0.35);
+        }
 
         .btn-caramel {
             background: linear-gradient(135deg, var(--caramel), var(--caramel-dark));
-            color: #fff; border: none;
-            box-shadow: 0 4px 18px rgba(212, 148, 58, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            color: #0C0908; border: none; font-weight: 600;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
         }
-        .btn-caramel:hover { box-shadow: 0 10px 30px rgba(212, 148, 58, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3); }
+        .btn-caramel:hover {
+            box-shadow: 0 10px 30px rgba(229, 192, 123, 0.35);
+        }
 
         /* ══════════════════════════════════════════════
            SCROLL REVEAL
@@ -372,45 +382,45 @@
         .menu-col-title {
             font-family: var(--font-display); font-size: 2.4rem;
             color: var(--chocolate); margin-bottom: 2.5rem; padding-bottom: 1rem;
-            border-bottom: 2px solid var(--fondant); font-weight: 400;
+            border-bottom: 1px solid var(--caramel-border); font-weight: 400;
         }
         .menu-col-title em { color: var(--caramel); font-weight: 300; }
 
         .menu-list { list-style: none; }
         .menu-item {
             display: flex; align-items: center; padding: 1.1rem 0.8rem; margin: 0 -0.8rem;
-            border-bottom: 1px dashed rgba(42, 24, 16, 0.08); border-radius: 10px;
+            border-bottom: 1px dashed rgba(229, 192, 123, 0.12); border-radius: 10px;
             transition: all 0.4s var(--ease-cake); cursor: default;
         }
         .menu-item:last-child { border-bottom: none; }
         .menu-item:hover {
-            background: linear-gradient(90deg, var(--strawberry-soft), transparent);
+            background: linear-gradient(90deg, rgba(229, 192, 123, 0.08), transparent);
             padding-left: 1.2rem;
         }
-        .menu-item:hover .m-name { color: var(--chocolate); }
-        .menu-item:hover .m-dots { border-color: rgba(232, 160, 176, 0.4); }
+        .menu-item:hover .m-name { color: var(--caramel); }
+        .menu-item:hover .m-dots { border-color: rgba(229, 192, 123, 0.4); }
 
-        .m-name { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 400; color: var(--chocolate-milk); white-space: nowrap; transition: all 0.3s ease; }
-        .m-dots { flex: 1; margin: 0 1rem; border-bottom: 1px dashed rgba(42, 24, 16, 0.12); position: relative; top: -3px; transition: border-color 0.3s ease; }
+        .m-name { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 400; color: var(--chocolate); white-space: nowrap; transition: all 0.3s ease; }
+        .m-dots { flex: 1; margin: 0 1rem; border-bottom: 1px dashed rgba(229, 192, 123, 0.18); position: relative; top: -3px; transition: border-color 0.3s ease; }
 
         .m-badge {
             font-family: var(--font-accent); font-size: 0.62rem; letter-spacing: 2px;
             text-transform: uppercase; padding: 0.35rem 0.9rem;
-            background: linear-gradient(145deg, var(--buttercream), var(--fondant));
+            background: #1C1410;
             border: 1px solid var(--caramel-border); border-radius: 50px;
             color: var(--caramel); box-shadow: var(--shadow-macaron);
             white-space: nowrap; transition: all 0.3s ease;
         }
         .menu-item:hover .m-badge {
-            background: linear-gradient(135deg, var(--strawberry), var(--raspberry));
-            color: #fff; border-color: transparent;
-            box-shadow: 0 4px 12px rgba(212, 114, 140, 0.3);
+            background: linear-gradient(135deg, var(--caramel), var(--caramel-dark));
+            color: #0C0908; border-color: transparent; font-weight: 600;
+            box-shadow: 0 4px 14px rgba(229, 192, 123, 0.3);
         }
 
         .menu-sub-title {
             font-family: var(--font-display); font-size: 2rem; color: var(--chocolate);
             margin: 3.5rem 0 2rem; padding-bottom: 0.8rem;
-            border-bottom: 2px solid var(--fondant); font-weight: 400;
+            border-bottom: 1px solid var(--caramel-border); font-weight: 400;
         }
         .menu-sub-title em { color: var(--caramel); font-weight: 300; }
 
@@ -435,9 +445,9 @@
         }
         .testimonial-card::before {
             content: '\201C'; font-family: var(--font-display); font-size: 5rem;
-            color: rgba(232, 160, 176, 0.15); position: absolute; top: 12px; left: 28px; line-height: 1;
+            color: rgba(229, 192, 123, 0.12); position: absolute; top: 12px; left: 28px; line-height: 1;
         }
-        .testimonial-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-elevated); border-color: var(--strawberry); }
+        .testimonial-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-elevated); border-color: var(--caramel); }
         .stars { color: var(--caramel); font-size: 1.2rem; letter-spacing: 6px; margin-bottom: 2rem; }
         .review-text { font-family: var(--font-heading); font-style: italic; font-size: 1.35rem; font-weight: 300; color: var(--chocolate-milk); line-height: 1.8; }
         .reviewer-name { font-family: var(--font-accent); font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--caramel); margin-top: 2.5rem; }
@@ -446,14 +456,14 @@
            MARQUEE RIBBON
            ══════════════════════════════════════════════ */
         .ribbon-wrapper {
-            background: linear-gradient(135deg, var(--fondant), var(--macaron));
+            background: linear-gradient(135deg, #18110D, #0F0A08);
             padding: 1.5rem 0; overflow: hidden;
             border-top: 1px solid var(--caramel-border); border-bottom: 1px solid var(--caramel-border);
             transform: rotate(-1.5deg) scale(1.04); margin: 4rem 0;
-            box-shadow: 0 4px 20px rgba(42, 24, 16, 0.06);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
         }
         .ribbon { display: flex; white-space: nowrap; animation: scrollRibbon 30s linear infinite; }
-        .ribbon span { font-family: var(--font-accent); font-size: 1rem; color: var(--chocolate-milk); text-transform: uppercase; letter-spacing: 5px; margin-right: 3rem; }
+        .ribbon span { font-family: var(--font-accent); font-size: 1rem; color: var(--caramel); text-transform: uppercase; letter-spacing: 5px; margin-right: 3rem; }
         .ribbon .dot-sep { color: var(--strawberry); }
         @keyframes scrollRibbon { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -461,7 +471,7 @@
            FOOTER
            ══════════════════════════════════════════════ */
         footer {
-            background: linear-gradient(to bottom, var(--sponge-deep), var(--fondant));
+            background: linear-gradient(to bottom, #0D0907, #060403);
             border-top: 1px solid var(--caramel-border); padding: 8rem 5% 3rem; margin-top: 6rem;
         }
         .footer-grid { display: grid; grid-template-columns: 1fr; gap: 5rem; max-width: 1600px; margin: 0 auto 6rem; }
@@ -563,8 +573,8 @@
         <!-- Frosting Wave Divider -->
         <div class="frosting-divider">
             <svg viewBox="0 0 1200 60" preserveAspectRatio="none" fill="none">
-                <path d="M0 30 Q150 0 300 30 T600 30 T900 30 T1200 30 V60 H0Z" fill="rgba(249, 232, 218, 0.5)" />
-                <path d="M0 35 Q150 10 300 35 T600 35 T900 35 T1200 35 V60 H0Z" fill="rgba(242, 215, 196, 0.3)" />
+                <path d="M0 30 Q150 0 300 30 T600 30 T900 30 T1200 30 V60 H0Z" fill="rgba(24, 18, 14, 0.9)" />
+                <path d="M0 35 Q150 10 300 35 T600 35 T900 35 T1200 35 V60 H0Z" fill="rgba(34, 25, 20, 0.5)" />
             </svg>
         </div>
 
