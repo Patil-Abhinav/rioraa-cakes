@@ -281,26 +281,62 @@
             position: relative; width: 100%; height: 750px; overflow: hidden;
             border-radius: 400px 400px 20px 20px;
             box-shadow: var(--shadow-drizzle);
-            background: var(--fondant);
+            background: #080605;
+            display: flex; align-items: center; justify-content: center;
         }
         /* Outer caramel drizzle rim */
         .cake-frame::before {
             content: ''; position: absolute; inset: 0; border-radius: inherit;
-            border: 2px solid rgba(212, 148, 58, 0.35); z-index: 3; pointer-events: none;
+            border: 2px solid rgba(229, 192, 123, 0.28); z-index: 3; pointer-events: none;
         }
         /* Inner frosting ring */
         .cake-frame::after {
             content: ''; position: absolute; inset: 10px; border-radius: inherit;
-            border: 1px solid rgba(232, 160, 176, 0.25); z-index: 3; pointer-events: none;
+            border: 1px solid rgba(229, 192, 123, 0.15); z-index: 3; pointer-events: none;
             transition: inset 0.6s var(--ease-cake), border-color 0.4s ease;
         }
-        .cake-frame:hover::after { inset: 18px; border-color: rgba(232, 160, 176, 0.5); }
+        .cake-frame:hover::after { inset: 16px; border-color: rgba(229, 192, 123, 0.45); }
         .cake-frame img {
             width: 100%; height: 120%; object-fit: cover;
             position: absolute; top: -10%; left: 0;
             transition: transform 6s ease, filter 0.5s ease;
         }
         .cake-frame:hover img { transform: scale(1.04); filter: brightness(1.06) saturate(1.05); }
+
+        /* Black Luxury Image Placeholder */
+        .pic-placeholder {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(circle at center, #150F0D 0%, #080605 80%);
+            padding: 2rem; text-align: center;
+            position: relative; z-index: 1;
+        }
+        .pic-placeholder-box {
+            width: 90%; height: 90%;
+            border: 1px dashed rgba(229, 192, 123, 0.25);
+            border-radius: inherit;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 2rem;
+            transition: all 0.5s var(--ease-cake);
+            background: rgba(14, 10, 8, 0.4);
+        }
+        .cake-frame:hover .pic-placeholder-box {
+            border-color: rgba(229, 192, 123, 0.6);
+            background: rgba(20, 14, 11, 0.6);
+            transform: scale(0.98);
+        }
+        .pic-placeholder-icon {
+            font-size: 2.2rem; color: var(--caramel); margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(229, 192, 123, 0.3));
+        }
+        .pic-placeholder-text {
+            font-family: var(--font-accent); font-size: 0.92rem; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--caramel); font-weight: 500; margin-bottom: 0.5rem;
+        }
+        .pic-placeholder-sub {
+            font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--cocoa-dust);
+        }
 
         .arch-left  { border-radius: 400px 20px 20px 400px; }
         .arch-right { border-radius: 20px 400px 400px 20px; }
@@ -565,7 +601,13 @@
                     <p>Sourcing only the finest European cocoa, artisanal dairy, and rare ingredients, our creations are meticulously crafted to deliver a multi-sensory journey. Every cake that leaves our kitchen is a testament to the art of fine baking.</p>
                 </div>
                 <div class="cake-frame">
-                    <img src="story_kitchen_1786733463544.jpg" alt="Chef plating luxury dessert">
+                    <div class="pic-placeholder">
+                        <div class="pic-placeholder-box">
+                            <span class="pic-placeholder-icon">✦</span>
+                            <span class="pic-placeholder-text">Add Your Picture Here</span>
+                            <span class="pic-placeholder-sub">Story &amp; Kitchen Showcase</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -638,13 +680,25 @@
                     <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">View &amp; Order</a>
                 </div>
                 <div class="cake-frame sig-img arch-right">
-                    <img src="story_kitchen_1786733463544.jpg" alt="The Dream Cake">
+                    <div class="pic-placeholder">
+                        <div class="pic-placeholder-box">
+                            <span class="pic-placeholder-icon">✦</span>
+                            <span class="pic-placeholder-text">Add Your Picture Here</span>
+                            <span class="pic-placeholder-sub">The Dream Cake</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="signature-row reveal">
                 <div class="cake-frame sig-img arch-left">
-                    <img src="premium_truffle_1786733597555.jpg" alt="Premium Truffle">
+                    <div class="pic-placeholder">
+                        <div class="pic-placeholder-box">
+                            <span class="pic-placeholder-icon">✦</span>
+                            <span class="pic-placeholder-text">Add Your Picture Here</span>
+                            <span class="pic-placeholder-sub">Premium Truffle</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="sig-content">
                     <div class="sig-tag">Classic</div>
@@ -662,7 +716,13 @@
                     <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">View &amp; Order</a>
                 </div>
                 <div class="cake-frame sig-img">
-                    <img src="rasmalai_fusion_1786734006326.jpg" alt="Rasmalai Fusion">
+                    <div class="pic-placeholder">
+                        <div class="pic-placeholder-box">
+                            <span class="pic-placeholder-icon">✦</span>
+                            <span class="pic-placeholder-text">Add Your Picture Here</span>
+                            <span class="pic-placeholder-sub">Rasmalai Fusion</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -720,7 +780,13 @@
         <section id="bespoke" class="reveal">
             <div class="grid-2 reverse">
                 <div class="cake-frame bespoke-arch">
-                    <img src="bespoke_wedding_1786734098098.jpg" alt="Bespoke Wedding Cake">
+                    <div class="pic-placeholder">
+                        <div class="pic-placeholder-box">
+                            <span class="pic-placeholder-icon">✦</span>
+                            <span class="pic-placeholder-text">Add Your Picture Here</span>
+                            <span class="pic-placeholder-sub">Bespoke Wedding Cake</span>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <div class="section-label">Made to Order</div>
