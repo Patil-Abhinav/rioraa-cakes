@@ -317,6 +317,26 @@
             color: var(--caramel);
         }
 
+        .hero-title-wrap {
+            margin: 0.5rem 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-wordmark {
+            width: clamp(300px, 52vw, 720px);
+            height: auto;
+            max-width: 90vw;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 25px rgba(229, 192, 123, 0.25));
+            transition: transform 0.6s var(--ease-cake), filter 0.6s var(--ease-cake);
+        }
+        .hero-wordmark:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 6px 35px rgba(229, 192, 123, 0.45));
+        }
+
         .hero-sub {
             font-family: var(--font-heading); font-size: clamp(1.3rem, 2.5vw, 2rem);
             color: var(--cocoa-dust); font-weight: 300; font-style: italic;
@@ -728,7 +748,9 @@
                 <img src="logo.png" alt="RIORA Luxury Patisserie Logo" class="hero-logo-img">
             </div>
             <div class="hero-badge"><span class="dot"></span> Fine Patisserie &amp; Cloud Kitchen</div>
-            <h1 class="hero-title">R<span class="drizzle">i</span>or<span class="drizzle">a</span></h1>
+            <h1 class="hero-title-wrap">
+                <img src="riora_wordmark_gold.png" alt="RIORA" class="hero-wordmark">
+            </h1>
             <p class="hero-sub">Baked with love — shared with happiness</p>
             <a href="#menu" class="btn-macaron reveal">Explore the Menu</a>
             <div class="scroll-hint">
