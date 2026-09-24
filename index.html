@@ -68,8 +68,31 @@
         /* ══════════════════════════════════════════════
            RESET & BASE
            ══════════════════════════════════════════════ */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        /* 🍰 Cake Cursor */
+        .cursor-cake {
+            width: 30px; height: 30px; position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4943A' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8'/%3E%3Cpath d='M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1'/%3E%3Cpath d='M2 21h20'/%3E%3Cpath d='M7 8v2'/%3E%3Cpath d='M12 8v2'/%3E%3Cpath d='M17 8v2'/%3E%3Cpath d='M7 4h.01'/%3E%3Cpath d='M12 4h.01'/%3E%3Cpath d='M17 4h.01'/%3E%3C/svg%3E");
+            background-size: contain; background-repeat: no-repeat;
+            filter: drop-shadow(0 2px 6px rgba(42, 24, 16, 0.25));
+        }
+        .cursor-ring {
+            width: 44px; height: 44px;
+            border: 1.5px solid rgba(232, 160, 176, 0.5);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Disable cursor on touch devices */
+        @media (pointer: coarse) {
+            .cursor-cake, .cursor-ring { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, .btn-macaron, .menu-item { cursor: pointer !important; }
+        }
 
         body {
             background: linear-gradient(180deg, var(--sponge) 0%, var(--sponge-deep) 40%, var(--sponge) 70%, var(--sponge-deep) 100%);
@@ -497,6 +520,10 @@
     </style>
 </head>
 <body>
+    <!-- Cake Cursor -->
+    <div class="cursor-cake" id="cursor-cake"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
     <!-- Ambient Cake Glows -->
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
@@ -774,6 +801,43 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // 🍰 Cake Cursor (desktop only)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const cake = document.getElementById('cursor-cake');
+                const ring = document.getElementById('cursor-ring');
+                let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+                let rx = mx, ry = my;
+
+                window.addEventListener('mousemove', e => {
+                    mx = e.clientX; my = e.clientY;
+                    cake.style.left = mx + 'px'; cake.style.top = my + 'px';
+                });
+
+                const animateRing = () => {
+                    rx += (mx - rx) * 0.14;
+                    ry += (my - ry) * 0.14;
+                    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+                    requestAnimationFrame(animateRing);
+                };
+                animateRing();
+
+                document.querySelectorAll('a, button, .btn-macaron, .menu-item').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        ring.style.width = '65px'; ring.style.height = '65px';
+                        ring.style.backgroundColor = 'rgba(232, 160, 176, 0.1)';
+                        ring.style.borderColor = 'rgba(212, 148, 58, 0.5)';
+                        cake.style.width = '18px'; cake.style.height = '18px';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        ring.style.width = '44px'; ring.style.height = '44px';
+                        ring.style.backgroundColor = 'transparent';
+                        ring.style.borderColor = 'rgba(232, 160, 176, 0.5)';
+                        cake.style.width = '30px'; cake.style.height = '30px';
+                    });
+                });
+            }
+
             // Sticky Navbar
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
