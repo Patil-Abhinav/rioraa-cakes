@@ -354,11 +354,11 @@
         }
         .cake-frame:hover::after { inset: 16px; border-color: rgba(229, 192, 123, 0.45); }
         .cake-frame img {
-            width: 100%; height: 120%; object-fit: cover;
-            position: absolute; top: -10%; left: 0;
-            transition: transform 6s ease, filter 0.5s ease;
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; top: 0; left: 0; z-index: 1;
+            transition: transform 1.2s var(--ease-cake), filter 0.5s ease;
         }
-        .cake-frame:hover img { transform: scale(1.04); filter: brightness(1.06) saturate(1.05); }
+        .cake-frame:hover img { transform: scale(1.05); filter: brightness(1.05) saturate(1.05); }
 
         /* Black Luxury Image Placeholder */
         .pic-placeholder {
@@ -808,67 +808,52 @@
             </div>
         </div>
 
-        <!-- ════════ CHEF'S SIGNATURES ════════ -->
+        <!-- ════════ TOP SELLING / CHEF'S SIGNATURES ════════ -->
         <section id="signatures">
             <div style="text-align: center; margin-bottom: 8rem;" class="reveal">
                 <div class="section-label" style="justify-content: center;">
                     <span style="width: 36px; height: 1px; background: var(--caramel); display: block;"></span>
-                    Bestsellers
+                    Customer Favorites
                 </div>
-                <h2 class="section-title">Chef's <em>Signatures</em></h2>
+                <h2 class="section-title">Top Selling <em>Creations</em></h2>
             </div>
 
+            <!-- 1. BROWNIES -->
             <div class="signature-row reveal">
                 <div class="sig-content">
-                    <div class="sig-tag">Bestseller</div>
-                    <h3 class="sig-title">The Dream Cake</h3>
-                    <p>A mesmerizing five-layer chocolate indulgence. Featuring a rich mud cake base, layered with French chocolate mousse, ganache, and enrobed in a mirror glaze. A true masterpiece.</p>
-                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">View &amp; Order</a>
+                    <div class="sig-tag">Top Selling &bull; 01</div>
+                    <h3 class="sig-title">Fudgy <em>Brownies</em></h3>
+                    <p>Our iconic Belgian chocolate chip fudge brownies. Crafted with rich Dutch cocoa, studded with semi-sweet chocolate chips, baked to a crackly glossy top and an impossibly fudgy, gooey center.</p>
+                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">Explore &amp; Order</a>
                 </div>
                 <div class="cake-frame sig-img arch-right">
-                    <div class="pic-placeholder">
-                        <div class="pic-placeholder-box">
-                            <span class="pic-placeholder-icon">✦</span>
-                            <span class="pic-placeholder-text">Add Your Picture Here</span>
-                            <span class="pic-placeholder-sub">The Dream Cake</span>
-                        </div>
-                    </div>
+                    <img src="brownies.png" alt="RIORA Artisan Fudgy Brownies">
                 </div>
             </div>
 
+            <!-- 2. CHOCOLATE TRUFFLE -->
             <div class="signature-row reveal">
                 <div class="cake-frame sig-img arch-left">
-                    <div class="pic-placeholder">
-                        <div class="pic-placeholder-box">
-                            <span class="pic-placeholder-icon">✦</span>
-                            <span class="pic-placeholder-text">Add Your Picture Here</span>
-                            <span class="pic-placeholder-sub">Premium Truffle</span>
-                        </div>
-                    </div>
+                    <img src="chocolate_truffle.jpg" alt="RIORA Premium Chocolate Truffle Cake">
                 </div>
                 <div class="sig-content">
-                    <div class="sig-tag">Classic</div>
-                    <h3 class="sig-title">Premium Truffle</h3>
-                    <p>Dense, dark, and utterly decadent. Made with 70% dark single-origin chocolate, this truffle cake is a sophisticated balance of bitterness and deep cocoa flavors.</p>
-                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">View &amp; Order</a>
+                    <div class="sig-tag">Top Selling &bull; 02</div>
+                    <h3 class="sig-title">Chocolate <em>Truffle</em></h3>
+                    <p>Dense, dark, and utterly decadent. Made with 70% dark single-origin chocolate, layered with silky French ganache, enrobed in a mirror glaze, and crowned with delicate chocolate curls.</p>
+                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">Explore &amp; Order</a>
                 </div>
             </div>
 
+            <!-- 3. DREAM CAKE -->
             <div class="signature-row reveal">
                 <div class="sig-content">
-                    <div class="sig-tag">Signature Fusion</div>
-                    <h3 class="sig-title">Rasmalai Fusion</h3>
-                    <p>An elegant marriage of Indian heritage and European pastry. Cardamom-infused sponge layers soaked in saffron milk, frosted with delicate pistachio mascarpone.</p>
-                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">View &amp; Order</a>
+                    <div class="sig-tag">Top Selling &bull; 03</div>
+                    <h3 class="sig-title">The <em>Dream Cake</em></h3>
+                    <p>Our ultimate signature creation. An extraordinary multi-layered chocolate symphony featuring moist mud cake, velvety chocolate mousse, luscious Belgian ganache, and handcrafted chocolate medallions.</p>
+                    <a href="#menu" class="btn-macaron" style="margin-top: 1.5rem;">Explore &amp; Order</a>
                 </div>
-                <div class="cake-frame sig-img">
-                    <div class="pic-placeholder">
-                        <div class="pic-placeholder-box">
-                            <span class="pic-placeholder-icon">✦</span>
-                            <span class="pic-placeholder-text">Add Your Picture Here</span>
-                            <span class="pic-placeholder-sub">Rasmalai Fusion</span>
-                        </div>
-                    </div>
+                <div class="cake-frame sig-img arch-right">
+                    <img src="dream_cake.png" alt="RIORA The Dream Cake">
                 </div>
             </div>
         </section>
