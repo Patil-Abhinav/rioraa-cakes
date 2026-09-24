@@ -460,6 +460,89 @@
         }
         .menu-sub-title em { color: var(--caramel); font-weight: 300; }
 
+        .m-heart {
+            color: var(--strawberry);
+            font-size: 0.85rem;
+            margin-right: 0.75rem;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .menu-item:hover .m-heart {
+            transform: scale(1.35);
+            color: var(--caramel);
+        }
+
+        .cakes-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0 4rem;
+        }
+        @media (min-width: 900px) {
+            .cakes-grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .menu-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4.5rem;
+            padding-top: 3.5rem;
+            border-top: 1px solid var(--caramel-border);
+        }
+        .menu-feature-box {
+            text-align: center;
+            padding: 2.2rem 1.5rem;
+            background: rgba(22, 16, 13, 0.55);
+            border: 1px solid rgba(229, 192, 123, 0.18);
+            border-radius: 20px;
+            transition: all 0.4s var(--ease-cake);
+        }
+        .menu-feature-box:hover {
+            transform: translateY(-6px);
+            border-color: var(--caramel);
+            background: rgba(30, 22, 18, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .menu-feature-icon {
+            font-size: 2rem;
+            color: var(--caramel);
+            margin-bottom: 0.8rem;
+            display: inline-block;
+        }
+        .menu-feature-title {
+            font-family: var(--font-accent);
+            font-size: 0.82rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--caramel);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .menu-feature-desc {
+            font-size: 0.85rem;
+            color: var(--chocolate-milk);
+            margin: 0;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+        .menu-dm-banner {
+            text-align: center;
+            margin-top: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .menu-dm-tag {
+            font-family: var(--font-accent);
+            font-size: 0.82rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--caramel);
+        }
+
         /* ══════════════════════════════════════════════
            BESPOKE CREATIONS
            ══════════════════════════════════════════════ */
@@ -732,45 +815,105 @@
             <div style="text-align: center; margin-bottom: 5rem;">
                 <div class="section-label" style="justify-content: center;">
                     <span style="width: 36px; height: 1px; background: var(--caramel); display: block;"></span>
-                    Our Offerings
+                    Every bite, a happy moment
                 </div>
                 <h2 class="section-title">The <em>Grand</em> Menu</h2>
+                <p style="font-family: var(--font-accent); font-size: 0.85rem; letter-spacing: 5px; text-transform: uppercase; color: var(--caramel);">
+                    Baked with love &bull; Shared with happiness
+                </p>
             </div>
 
             <div class="menu-panel">
+                <!-- 1. CAKES SECTION -->
+                <div style="margin-bottom: 4.5rem;">
+                    <h3 class="menu-col-title" style="text-align: center; margin-bottom: 3rem;">
+                        Artisan <em>Cakes</em>
+                    </h3>
+                    <div class="cakes-grid-2col">
+                        <ul class="menu-list">
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Butterscotch</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Mango Choco Delight</span><div class="m-dots"></div><span class="m-badge">Special</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Rasmalai</span><div class="m-dots"></div><span class="m-badge">Signature</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Premium Chocolate Truffle Cake</span><div class="m-dots"></div><span class="m-badge">Bestseller</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Pineapple Cake</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Honey &amp; Almond Cake</span><div class="m-dots"></div><span class="m-badge">Chef's Pick</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Choco Truffle Nuts</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Vanilla</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Strawberry</span><div class="m-dots"></div></li>
+                        </ul>
+                        <ul class="menu-list">
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Mango</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Black Forest</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Black Currant</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Oreo</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Choco Chip</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Red Velvet</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Kit Kat</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Lotus Biscoff</span><div class="m-dots"></div><span class="m-badge">Popular</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Dream Cake</span><div class="m-dots"></div><span class="m-badge">Premium</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. BROWNIES & CUPCAKES SECTION -->
                 <div class="menu-grid">
                     <div>
-                        <h3 class="menu-col-title">Signature <em>Cakes</em></h3>
+                        <h3 class="menu-col-title">Fudgy <em>Brownies</em></h3>
                         <ul class="menu-list">
-                            <li class="menu-item"><span class="m-name">The Dream Cake</span><div class="m-dots"></div><span class="m-badge">Signature</span></li>
-                            <li class="menu-item"><span class="m-name">Premium Chocolate Truffle</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Rasmalai Fusion</span><div class="m-dots"></div><span class="m-badge">Popular</span></li>
-                            <li class="menu-item"><span class="m-name">Butterscotch Caramel Crunch</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Red Velvet Cream Cheese</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Black Forest Cherry Reserve</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">White Forest Elegance</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Pineapple Paradise</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Mango Alphonso</span><div class="m-dots"></div><span class="m-badge">Seasonal</span></li>
-                            <li class="menu-item"><span class="m-name">Blueberry Cheesecake</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Lotus Biscoff Delight</span><div class="m-dots"></div><span class="m-badge">Premium</span></li>
-                            <li class="menu-item"><span class="m-name">Coffee Opera Cake</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Classic Fudgy</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Choco Chip</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Oreo</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Walnut</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Lotus Biscoff</span><div class="m-dots"></div><span class="m-badge">Must Try</span></li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="menu-col-title">Artisan <em>Brownies</em></h3>
+                        <h3 class="menu-col-title">Luxury <em>Cupcakes</em></h3>
                         <ul class="menu-list">
-                            <li class="menu-item"><span class="m-name">Classic Fudgy Walnut</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Triple Chocolate Chunk</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Salted Caramel Swirl</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Biscoff Overload</span><div class="m-dots"></div><span class="m-badge">Must Try</span></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Vanilla</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Chocolate</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Butterscotch</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Red Velvet</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Oreo</span><div class="m-dots"></div></li>
+                            <li class="menu-item"><span class="m-name"><span class="m-heart">♥</span>Choco Chip</span><div class="m-dots"></div></li>
                         </ul>
-                        <h3 class="menu-sub-title">Luxury <em>Cupcakes</em></h3>
-                        <ul class="menu-list">
-                            <li class="menu-item"><span class="m-name">Vanilla Bean Crown</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Double Chocolate Majesty</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Red Velvet Royal</span><div class="m-dots"></div></li>
-                            <li class="menu-item"><span class="m-name">Lemon Meringue</span><div class="m-dots"></div></li>
-                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. CRAFTED WITH CARE (TRUST PILLARS) -->
+                <div class="menu-features-grid">
+                    <div class="menu-feature-box">
+                        <div class="menu-feature-icon">🌿</div>
+                        <h4 class="menu-feature-title">Premium Ingredients</h4>
+                        <p class="menu-feature-desc">Finest quality in every single bite.</p>
+                    </div>
+                    <div class="menu-feature-box">
+                        <div class="menu-feature-icon">🥣</div>
+                        <h4 class="menu-feature-title">Made Fresh</h4>
+                        <p class="menu-feature-desc">Prepared fresh daily with precision and care.</p>
+                    </div>
+                    <div class="menu-feature-box">
+                        <div class="menu-feature-icon">♡</div>
+                        <h4 class="menu-feature-title">Baked With Love</h4>
+                        <p class="menu-feature-desc">Made with love, just for your celebrations.</p>
+                    </div>
+                    <div class="menu-feature-box">
+                        <div class="menu-feature-icon">🎂</div>
+                        <h4 class="menu-feature-title">Custom Vibes Accepted</h4>
+                        <p class="menu-feature-desc">Tell us your dream idea, we'll bake it.</p>
+                    </div>
+                </div>
+
+                <!-- 4. DM TO ORDER ACTION -->
+                <div class="menu-dm-banner">
+                    <p class="menu-dm-tag">DM to Order &bull; Custom Vibes Accepted ♡</p>
+                    <div style="display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="https://wa.me/916363020256?text=Hi%20RIORA,%20I%20would%20like%20to%20place%20an%20order!" target="_blank" rel="noopener" class="btn-macaron btn-caramel">
+                            Order on WhatsApp
+                        </a>
+                        <a href="https://instagram.com/rioraa_official" target="_blank" rel="noopener" class="btn-macaron btn-strawberry">
+                            DM on Instagram
+                        </a>
                     </div>
                 </div>
             </div>
