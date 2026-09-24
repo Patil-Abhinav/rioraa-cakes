@@ -13,31 +13,31 @@
            strawberry cream, cocoa dust, fondant & frosting.
            ══════════════════════════════════════════════ */
         :root {
-            /* Sponge & Buttercream Canvas */
-            --sponge:           #FFF5E6;
-            --sponge-deep:      #FDECD3;
-            --buttercream:      #FFFCF5;
-            --frosting:         rgba(255, 252, 245, 0.75);
+            /* Warm Parchment Canvas (toned down) */
+            --sponge:           #F3EBE0;
+            --sponge-deep:      #EBE0D2;
+            --buttercream:      #F7F2EC;
+            --frosting:         rgba(243, 235, 224, 0.7);
 
             /* Cake Accents */
-            --caramel:          #D4943A;
-            --caramel-dark:     #B07A2E;
-            --caramel-glow:     rgba(212, 148, 58, 0.12);
-            --caramel-border:   rgba(212, 148, 58, 0.3);
-            --strawberry:       #E8A0B0;
-            --strawberry-soft:  rgba(232, 160, 176, 0.15);
-            --strawberry-glow:  rgba(232, 160, 176, 0.25);
-            --raspberry:        #D4728C;
+            --caramel:          #C08535;
+            --caramel-dark:     #9E6C28;
+            --caramel-glow:     rgba(192, 133, 53, 0.1);
+            --caramel-border:   rgba(192, 133, 53, 0.22);
+            --strawberry:       #D08A9A;
+            --strawberry-soft:  rgba(208, 138, 154, 0.1);
+            --strawberry-glow:  rgba(208, 138, 154, 0.15);
+            --raspberry:        #B86278;
             --chocolate:        #2A1810;
-            --chocolate-milk:   #6B4A3A;
-            --cocoa-dust:       #A07B64;
-            --fondant:          #F9E8DA;
-            --macaron:          #F2D7C4;
+            --chocolate-milk:   #5E4438;
+            --cocoa-dust:       #8C7060;
+            --fondant:          #E8D9CA;
+            --macaron:          #DFD0C0;
 
-            /* Ambient Lighting */
-            --glow-caramel:     rgba(240, 200, 130, 0.35);
-            --glow-strawberry:  rgba(232, 160, 176, 0.2);
-            --glow-vanilla:     rgba(255, 240, 210, 0.4);
+            /* Ambient Lighting (much subtler) */
+            --glow-caramel:     rgba(220, 185, 130, 0.15);
+            --glow-strawberry:  rgba(208, 138, 154, 0.1);
+            --glow-vanilla:     rgba(240, 225, 195, 0.18);
 
             /* Shadows — Soft Baked Feel */
             --shadow-card:
@@ -107,16 +107,16 @@
         body::before {
             content: '';
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
-            opacity: 0.025;
+            opacity: 0.018;
             mix-blend-mode: soft-light;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke-width='1.5' opacity='0.8'%3E%3Cline x1='8' y1='5' x2='12' y2='9' stroke='%23D4943A'/%3E%3Cline x1='45' y1='12' x2='49' y2='8' stroke='%23E8A0B0'/%3E%3Cline x1='25' y1='35' x2='29' y2='39' stroke='%23D4728C'/%3E%3Cline x1='50' y1='45' x2='54' y2='41' stroke='%23D4943A'/%3E%3Cline x1='15' y1='50' x2='11' y2='54' stroke='%23A07B64'/%3E%3Ccircle cx='35' cy='8' r='1.5' fill='%23E8A0B0'/%3E%3Ccircle cx='5' cy='28' r='1' fill='%23D4943A'/%3E%3Ccircle cx='55' cy='30' r='1.2' fill='%23D4728C'/%3E%3C/g%3E%3C/svg%3E");
         }
 
-        /* Warm Ambient Glows */
-        .glow { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(90px); }
-        .glow-1 { width: 900px; height: 900px; top: -250px; right: -200px; background: var(--glow-caramel); animation: drift 22s ease-in-out infinite alternate; }
-        .glow-2 { width: 700px; height: 700px; bottom: 15%; left: -200px; background: var(--glow-strawberry); animation: drift 28s ease-in-out infinite alternate-reverse; }
-        .glow-3 { width: 600px; height: 600px; top: 45%; left: 40%; background: var(--glow-vanilla); animation: drift 35s ease-in-out infinite alternate; }
+        /* Warm Ambient Glows (subtle) */
+        .glow { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(100px); }
+        .glow-1 { width: 600px; height: 600px; top: -200px; right: -150px; background: var(--glow-caramel); animation: drift 22s ease-in-out infinite alternate; }
+        .glow-2 { width: 500px; height: 500px; bottom: 15%; left: -150px; background: var(--glow-strawberry); animation: drift 28s ease-in-out infinite alternate-reverse; }
+        .glow-3 { width: 400px; height: 400px; top: 45%; left: 40%; background: var(--glow-vanilla); animation: drift 35s ease-in-out infinite alternate; }
         @keyframes drift {
             0%   { transform: translate(0, 0) scale(1); }
             100% { transform: translate(50px, 70px) scale(1.1); }
@@ -460,7 +460,7 @@
             padding: 1.5rem 0; overflow: hidden;
             border-top: 1px solid var(--caramel-border); border-bottom: 1px solid var(--caramel-border);
             transform: rotate(-1.5deg) scale(1.04); margin: 4rem 0;
-            box-shadow: 0 8px 30px rgba(42, 24, 16, 0.08);
+            box-shadow: 0 4px 20px rgba(42, 24, 16, 0.06);
         }
         .ribbon { display: flex; white-space: nowrap; animation: scrollRibbon 30s linear infinite; }
         .ribbon span { font-family: var(--font-accent); font-size: 1rem; color: var(--chocolate-milk); text-transform: uppercase; letter-spacing: 5px; margin-right: 3rem; }
