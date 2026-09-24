@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIORA - Fine Dining Cloud Kitchen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0406; /* Even darker, richer base */
+            --bg-card: rgba(35, 12, 19, 0.4);
+            --text-light: #ffffff;
+            --text-muted: #d6b4bd;
+            --gold-start: #f2c792;
+            --gold-end: #fcedd0;
+            --gold-accent: #c49660;
+            --pink-accent: #9e425c;
+            --glass-border: rgba(242, 199, 146, 0.15);
+            
+            --font-main: 'Playfair Display', serif;
+            --font-sub: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --spacing-section: clamp(6rem, 15vw, 12rem);
+        }
+
+        /* Base & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        /* Noise Texture */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9997; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 28px; height: 28px; position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, opacity 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f2c792' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8'/%3E%3Cpath d='M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1'/%3E%3Cpath d='M2 21h20'/%3E%3Cpath d='M7 8v2'/%3E%3Cpath d='M12 8v2'/%3E%3Cpath d='M17 8v2'/%3E%3Cpath d='M7 4h.01'/%3E%3Cpath d='M12 4h.01'/%3E%3Cpath d='M17 4h.01'/%3E%3C/svg%3E");
+            background-size: contain; background-repeat: no-repeat; background-color: transparent; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 1px solid rgba(242, 199, 146, 0.4); position: fixed; border-radius: 50%;
+            pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Ambient Glows */
+        .ambient-glow {
+            position: absolute; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(158, 66, 92, 0.15) 0%, transparent 60%);
+            border-radius: 50%; filter: blur(60px); z-index: -1; pointer-events: none;
+        }
+        .glow-1 { top: -200px; left: -200px; animation: floatGlow 15s ease-in-out infinite alternate; }
+        .glow-2 { top: 40%; right: -300px; background: radial-gradient(circle, rgba(196, 150, 96, 0.1) 0%, transparent 60%); animation: floatGlow 20s ease-in-out infinite alternate-reverse; }
+        .glow-3 { bottom: 10%; left: -200px; }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 100px) scale(1.1); }
+        }
+
+        /* Typography & Gradients */
+        .gold-text {
+            background: linear-gradient(135deg, var(--gold-start), #ffffff, var(--gold-accent));
+            background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+            animation: shine 6s linear infinite; display: inline-block;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        
+        h1, h2, h3 { font-family: var(--font-main); font-weight: 400; line-height: 1.1; }
+        em { font-style: italic; color: var(--gold-start); font-weight: 300; }
+        p { color: var(--text-muted); font-size: 1.25rem; margin-bottom: 2rem; font-weight: 300; letter-spacing: 0.5px; }
+
+        /* Navigation */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, rgba(10, 4, 6, 0.9), transparent);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            z-index: 1000; transition: all 0.4s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(10, 4, 6, 0.85); border-bottom: 1px solid var(--glass-border); padding: 1rem 5%;
+        }
+        .nav-logo { font-family: var(--font-main); font-size: 1.8rem; color: var(--text-light); text-decoration: none; letter-spacing: 3px; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a {
+            font-family: var(--font-sub); color: var(--text-light); text-decoration: none;
+            font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+            transition: color 0.3s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--gold-start); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--gold-start); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Buttons */
+        .btn-outline {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1.2rem 3.5rem; border: 1px solid var(--gold-accent); color: var(--text-light);
+            text-transform: uppercase; letter-spacing: 4px; font-family: var(--font-sub); font-size: 0.85rem;
+            text-decoration: none; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden; background: rgba(35, 12, 19, 0.3); backdrop-filter: blur(5px);
+        }
+        .btn-outline::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--gold-accent), var(--gold-start));
+            transform: scaleX(0); transform-origin: right; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: -1;
+        }
+        .btn-outline:hover::before { transform: scaleX(1); transform-origin: left; }
+        .btn-outline:hover { color: var(--bg-dark); border-color: transparent; box-shadow: 0 15px 35px rgba(242, 199, 146, 0.3); letter-spacing: 6px; }
+
+        /* Scrolling Marquee */
+        .marquee-wrapper {
+            background: var(--gold-start); padding: 1.5rem 0; overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
+            transform: rotate(-2deg) scale(1.05); margin: 6rem 0; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .marquee {
+            display: flex; white-space: nowrap; animation: scrollMarquee 25s linear infinite;
+        }
+        .marquee span {
+            font-family: var(--font-sub); font-size: 1.2rem; color: var(--bg-dark);
+            text-transform: uppercase; letter-spacing: 4px; margin-right: 3rem; font-weight: 600;
+        }
+        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Scroll Reveal Animations */
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 2rem; position: relative;
+        }
+        .hero-title {
+            font-size: clamp(5rem, 18vw, 15rem); margin-bottom: 1rem; font-weight: 500;
+            letter-spacing: -3px; text-shadow: 0 20px 60px rgba(158, 66, 92, 0.5); z-index: 2;
+        }
+        .hero-tagline {
+            font-family: var(--font-sub); font-size: clamp(0.9rem, 1.5vw, 1.2rem); color: var(--text-light);
+            margin-bottom: 4rem; letter-spacing: 12px; text-transform: uppercase; font-weight: 300; z-index: 2;
+            opacity: 0.8;
+        }
+        
+        .scroll-indicator {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6;
+        }
+        .scroll-indicator span {
+            font-family: var(--font-sub); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-start);
+        }
+        .scroll-line {
+            width: 1px; height: 60px; background: rgba(242, 199, 146, 0.2); position: relative; overflow: hidden;
+        }
+        .scroll-line::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+            background: var(--gold-start); animation: scrollLine 2s ease-in-out infinite;
+        }
+        @keyframes scrollLine { 0% { top: -50%; } 100% { top: 100%; } }
+
+        /* Layout Grids */
+        section { padding: var(--spacing-section) 5%; max-width: 1700px; margin: 0 auto; position: relative; }
+        .section-title { font-size: clamp(3.5rem, 8vw, 6rem); margin-bottom: 2rem; }
+        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 6rem; align-items: center; }
+        @media(min-width: 1000px) {
+            .grid-2 { grid-template-columns: 1fr 1.2fr; }
+            .grid-2.reverse { grid-template-columns: 1.2fr 1fr; }
+        }
+
+        /* Premium Image Containers */
+        .img-container {
+            width: 100%; height: 800px; position: relative; overflow: hidden;
+            border: 1px solid var(--glass-border); box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.5);
+            border-radius: 2px;
+        }
+        .parallax-img {
+            width: 100%; height: 125%; object-fit: cover; position: absolute; top: -12.5%; left: 0;
+            will-change: transform; transition: filter 0.8s ease, transform 0.1s cubic-bezier(0,0,0,1);
+        }
+        .img-container:hover .parallax-img { filter: brightness(1.15) contrast(1.1); }
+        .arch-top { border-radius: 500px 500px 0 0; }
+        .arch-right { border-radius: 0 400px 400px 0; }
+        .arch-left { border-radius: 400px 0 0 400px; }
+        
+        .img-container::before {
+            content: ''; position: absolute; inset: 0; border: 1px solid rgba(242, 199, 146, 0.3);
+            border-radius: inherit; pointer-events: none; margin: 15px; z-index: 2; transition: margin 0.5s ease;
+        }
+        .img-container:hover::before { margin: 25px; border-color: rgba(242, 199, 146, 0.6); }
+
+        /* The Artisan Process */
+        .process-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media(min-width: 900px) { .process-grid { grid-template-columns: repeat(3, 1fr); gap: 4rem;} }
+        
+        .process-card {
+            background: linear-gradient(145deg, rgba(35, 12, 19, 0.8), rgba(15, 6, 9, 0.9));
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 6rem 3.5rem; text-align: center; position: relative;
+            border: 1px solid var(--glass-border); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 4px; overflow: hidden;
+        }
+        .process-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-start), transparent);
+            opacity: 0; transition: opacity 0.6s ease;
+        }
+        .process-card:hover { transform: translateY(-20px); border-color: rgba(242, 199, 146, 0.4); box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 40px rgba(158, 66, 92, 0.2); }
+        .process-card:hover::before { opacity: 1; }
+        
+        .roman-numeral {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: var(--font-main); font-size: 18rem; color: rgba(255, 255, 255, 0.03);
+            z-index: 0; pointer-events: none; font-style: italic; line-height: 1;
+        }
+        .process-title { font-family: var(--font-sub); font-size: 1.8rem; color: var(--gold-start); position: relative; z-index: 1; margin-bottom: 1.5rem; letter-spacing: 4px; }
+        .process-desc { position: relative; z-index: 1; font-size: 1.1rem; }
+
+        /* Chef's Signatures */
+        .signature-row { display: grid; grid-template-columns: 1fr; gap: 6rem; align-items: center; margin-bottom: 12rem; }
+        @media(min-width: 900px) {
+            .signature-row { grid-template-columns: 1.2fr 1fr; }
+            .signature-row:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
+            .signature-row:nth-child(odd) .sig-content { order: -1; }
+        }
+        .sig-img-wrapper { height: 650px; border-radius: 4px; }
+        .sig-title { font-size: 4.5rem; margin-bottom: 1.5rem; color: var(--text-light); }
+        
+        .category-tag {
+            font-family: var(--font-sub); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px;
+            color: var(--gold-start); display: flex; align-items: center; gap: 15px; margin-bottom: 2rem;
+        }
+        .category-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold-start); }
+
+        /* The Grand Menu */
+        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 5rem; }
+        @media(min-width: 1100px) { .menu-grid { grid-template-columns: 1fr 1fr; gap: 10rem;} }
+        
+        .menu-category-title { font-family: var(--font-main); font-size: 3rem; color: var(--text-light); margin-bottom: 3.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; }
+        .menu-category-title em { color: var(--gold-start); }
+        .menu-list { list-style: none; }
+        .menu-item { display: flex; align-items: baseline; margin-bottom: 2.2rem; font-family: var(--font-body); font-size: 1.25rem; transition: transform 0.4s ease; cursor: none; }
+        .menu-item:hover { transform: translateX(15px); }
+        .menu-name { color: var(--text-light); white-space: nowrap; font-weight: 300; transition: color 0.3s ease; }
+        .menu-item:hover .menu-name { color: var(--gold-start); }
+        .menu-dots { flex-grow: 1; border-bottom: 1px dashed rgba(242, 199, 146, 0.2); margin: 0 1.5rem; position: relative; top: -6px; transition: border-color 0.3s; }
+        .menu-item:hover .menu-dots { border-color: rgba(242, 199, 146, 0.6); }
+        .menu-tag { font-size: 0.75rem; font-family: var(--font-sub); background: rgba(242, 199, 146, 0.1); color: var(--gold-end); padding: 0.4rem 1rem; border: 1px solid var(--gold-accent); white-space: nowrap; border-radius: 30px; letter-spacing: 2px; }
+
+        /* Testimonials */
+        .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+        @media(min-width: 900px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        .testimonial-card {
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.03), transparent);
+            backdrop-filter: blur(10px); padding: 5rem 3rem; text-align: center; position: relative; border: 1px solid var(--glass-border);
+        }
+        .testimonial-card::before {
+            content: '“'; font-family: var(--font-main); font-size: 8rem; color: rgba(242, 199, 146, 0.1); position: absolute; top: 10px; left: 30px; line-height: 1;
+        }
+        .stars { color: var(--gold-start); font-size: 1.5rem; margin-bottom: 2.5rem; letter-spacing: 8px; }
+        .review-text { font-style: italic; font-family: var(--font-main); font-size: 1.5rem; color: var(--text-light); line-height: 1.8; font-weight: 300; }
+        .reviewer-name { font-family: var(--font-sub); color: var(--gold-accent); margin-top: 3rem; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; }
+
+        /* Footer */
+        footer { background: #050203; border-top: 1px solid var(--glass-border); padding: 10rem 5% 4rem; margin-top: 8rem; position: relative; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 6rem; max-width: 1700px; margin: 0 auto 8rem; }
+        @media(min-width: 900px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        
+        .footer-logo { font-size: 5rem; margin-bottom: 1.5rem; line-height: 1; letter-spacing: 2px; }
+        .footer-heading { font-family: var(--font-sub); color: var(--text-light); margin-bottom: 3rem; font-size: 1.2rem; letter-spacing: 4px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 1.5rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: all 0.3s ease; font-size: 1.1rem; position: relative; padding-bottom: 5px; }
+        .footer-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold-start); transition: width 0.4s ease; }
+        .footer-links a:hover { color: var(--gold-start); }
+        .footer-links a:hover::after { width: 100%; }
+        
+        .footer-bottom { text-align: center; padding-top: 4rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-family: var(--font-sub); font-size: 0.85rem; color: rgba(214, 180, 189, 0.4); letter-spacing: 5px; }
+
+        /* Mobile Responsiveness */
+        @media (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+            a, button, .btn-outline, .menu-item { cursor: pointer !important; }
+        }
+        @media (max-width: 900px) {
+            :root { --spacing-section: clamp(5rem, 10vw, 8rem); }
+            .grid-2 { gap: 4rem; }
+            .img-container, .sig-img-wrapper { height: 450px; }
+            .arch-top, .arch-right, .arch-left { border-radius: 40px; }
+            .roman-numeral { font-size: 10rem; }
+            .process-card { padding: 4rem 2rem; }
+            .menu-dots { margin: 0 0.5rem; }
+            .menu-name { white-space: normal; line-height: 1.4; }
+            .menu-item { font-size: 1.1rem; align-items: center; }
+            .signature-row { gap: 4rem; margin-bottom: 6rem; }
+            .footer-grid { gap: 4rem; }
+            .hero-title { font-size: clamp(4rem, 15vw, 6rem); }
+            .hero-tagline { font-size: 0.75rem; letter-spacing: 6px; }
+            .section-title { font-size: 3rem; }
+            .nav-links { display: none; } /* Hide links on mobile for simplicity, or could add hamburger */
+            .marquee span { font-size: 1rem; margin-right: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlays & Cursor -->
+    <div class="noise-overlay"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    
+    <!-- Ambient Lighting Backgrounds -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo gold-text">RIORA</a>
+        <ul class="nav-links">
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#signatures">Signatures</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#bespoke">Bespoke</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1 class="hero-title gold-text">RIORA</h1>
+        <p class="hero-tagline">Fine Dining Cloud Kitchen</p>
+        <a href="#menu" class="btn-outline reveal" style="margin-top: 2rem;">Explore The Menu</a>
+        
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section id="story" class="reveal">
+        <div class="grid-2">
+            <div>
+                <h2 class="section-title">The <em>Origins</em></h2>
+                <p>Born from a passion for unparalleled culinary excellence, RIORA is Hubballi's premier luxury cloud kitchen. We believe that dessert is not merely an afterthought, but the grand finale of a dining experience.</p>
+                <p>Sourcing only the finest European cocoa, artisanal dairy, and rare ingredients, our creations are meticulously crafted to deliver a multi-sensory journey. Every cake that leaves our kitchen is a testament to the art of fine baking.</p>
+            </div>
+            <div class="img-container arch-top">
+                <img src="story_kitchen_1786733463544.jpg" class="parallax-img" alt="Chef plating luxury dessert in a moody kitchen">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Decorative Marquee Ribbon -->
+    <div class="marquee-wrapper reveal">
+        <div class="marquee">
+            <span>Riora Fine Dining</span><span>•</span>
+            <span>Artisan Crafted</span><span>•</span>
+            <span>Unparalleled Luxury</span><span>•</span>
+            <span>Hubballi's Premier Cloud Kitchen</span><span>•</span>
+            <span>Riora Fine Dining</span><span>•</span>
+            <span>Artisan Crafted</span><span>•</span>
+            <span>Unparalleled Luxury</span><span>•</span>
+            <span>Hubballi's Premier Cloud Kitchen</span><span>•</span>
+        </div>
+    </div>
+
+    <!-- The Artisan Process -->
+    <section class="reveal">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 6rem;">The <em>Artisan</em> Process</h2>
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="roman-numeral">I</div>
+                <h3 class="process-title">Selection</h3>
+                <p class="process-desc">We scour the globe for the finest ingredients, from rich Belgian chocolate to delicate Madagascan vanilla.</p>
+            </div>
+            <div class="process-card">
+                <div class="roman-numeral">II</div>
+                <h3 class="process-title">Craft</h3>
+                <p class="process-desc">Our master chefs employ time-honored techniques mixed with modern culinary innovation.</p>
+            </div>
+            <div class="process-card">
+                <div class="roman-numeral">III</div>
+                <h3 class="process-title">Reveal</h3>
+                <p class="process-desc">Each creation is delicately packaged, ready to be unveiled as the centerpiece of your celebration.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Chef's Signatures -->
+    <section id="signatures" class="reveal">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 8rem;">Chef's <em>Signatures</em></h2>
+        
+        <div class="signature-row reveal">
+            <div class="sig-content">
+                <div class="category-tag">Bestseller</div>
+                <h3 class="sig-title">The Dream Cake</h3>
+                <p>A mesmerizing five-layer chocolate indulgence. Featuring a rich mud cake base, layered with French chocolate mousse, ganache, and enrobed in a mirror glaze. A true masterpiece.</p>
+            </div>
+            <div class="img-container sig-img-wrapper arch-right">
+                <img src="story_kitchen_1786733463544.jpg" class="parallax-img" alt="The Dream Cake">
+            </div>
+        </div>
+
+        <div class="signature-row reveal">
+            <div class="img-container sig-img-wrapper arch-left">
+                <img src="premium_truffle_1786733597555.jpg" class="parallax-img" alt="Premium Chocolate Truffle">
+            </div>
+            <div class="sig-content">
+                <div class="category-tag">Classic</div>
+                <h3 class="sig-title">Premium Truffle</h3>
+                <p>Dense, dark, and utterly decadent. Made with 70% dark single-origin chocolate, this truffle cake is a sophisticated balance of bitterness and deep cocoa flavors.</p>
+            </div>
+        </div>
+
+        <div class="signature-row reveal">
+            <div class="sig-content">
+                <div class="category-tag">Signature Fusion</div>
+                <h3 class="sig-title">Rasmalai Fusion</h3>
+                <p>An elegant marriage of Indian heritage and European pastry. Cardamom-infused sponge layers soaked in saffron milk, frosted with delicate pistachio mascarpone.</p>
+            </div>
+            <div class="img-container sig-img-wrapper arch-top">
+                <img src="rasmalai_fusion_1786734006326.jpg" class="parallax-img" alt="Rasmalai Fusion Cake">
+            </div>
+        </div>
+    </section>
+
+    <!-- The Grand Menu -->
+    <section id="menu" class="reveal">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 8rem;">The <em>Grand</em> Menu</h2>
+        
+        <div class="menu-grid">
+            <div>
+                <h3 class="menu-category-title">Signature <em>Cakes</em></h3>
+                <ul class="menu-list">
+                    <li class="menu-item"><span class="menu-name">The Dream Cake</span><div class="menu-dots"></div><span class="menu-tag">Signature</span></li>
+                    <li class="menu-item"><span class="menu-name">Premium Chocolate Truffle</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Rasmalai Fusion</span><div class="menu-dots"></div><span class="menu-tag">Popular</span></li>
+                    <li class="menu-item"><span class="menu-name">Butterscotch Caramel Crunch</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Red Velvet Cream Cheese</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Black Forest Cherry Reserve</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">White Forest Elegance</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Pineapple Paradise</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Mango Alphonso</span><div class="menu-dots"></div><span class="menu-tag">Seasonal</span></li>
+                    <li class="menu-item"><span class="menu-name">Blueberry Cheesecake</span><div class="menu-dots"></div></li>
+                    <li class="menu-item"><span class="menu-name">Lotus Biscoff Delight</span><div class="menu-dots"></div><span class="menu-tag">Premium</span></li>
+                    <li class="menu-item"><span class="menu-name">Coffee Opera Cake</span><div class="menu-dots"></div></li>
+                </ul>
+            </div>
+            
+            <div>
+                <div style="margin-bottom: 6rem;">
+                    <h3 class="menu-category-title">Artisan <em>Brownies</em></h3>
+                    <ul class="menu-list">
+                        <li class="menu-item"><span class="menu-name">Classic Fudgy Walnut</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Triple Chocolate Chunk</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Salted Caramel Swirl</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Biscoff Overload</span><div class="menu-dots"></div><span class="menu-tag">Must Try</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="menu-category-title">Luxury <em>Cupcakes</em></h3>
+                    <ul class="menu-list">
+                        <li class="menu-item"><span class="menu-name">Vanilla Bean Crown</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Double Chocolate Majesty</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Red Velvet Royal</span><div class="menu-dots"></div></li>
+                        <li class="menu-item"><span class="menu-name">Lemon Meringue</span><div class="menu-dots"></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bespoke Creations -->
+    <section id="bespoke" class="reveal">
+        <div class="grid-2 reverse">
+            <div class="img-container arch-left">
+                <img src="bespoke_wedding_1786734098098.jpg" class="parallax-img" alt="Towering Elegant Wedding Cake">
+            </div>
+            <div>
+                <h2 class="section-title">Bespoke <em>Creations</em></h2>
+                <p>For life's most monumental occasions, ordinary simply will not suffice. Our bespoke service offers fully custom-designed cakes tailored to your precise vision.</p>
+                <p>From towering, elegant wedding tiers adorned with hand-crafted sugar flowers to magnificent birthday centerpieces that defy imagination, our pastry architects will bring your dream to life.</p>
+                <a href="#contact" class="btn-outline" style="margin-top: 2rem;">Consult With Our Chef</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Words of Joy -->
+    <section class="reveal">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 6rem;">Words of <em>Joy</em></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"The Dream Cake from RIORA was the highlight of our anniversary. The layers were incredibly rich and the presentation was straight out of a Michelin-star restaurant."</p>
+                <p class="reviewer-name">Ayesha R.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Ordered the Rasmalai Fusion for my mother's 50th. It was a masterpiece of flavors. Hubballi finally has a world-class bakery."</p>
+                <p class="reviewer-name">Vikram S.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"The bespoke wedding cake they created for us was breathtaking. Every guest asked where it was from. Highly professional service."</p>
+                <p class="reviewer-name">Priya & Rahul</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <h2 class="footer-logo gold-text">RIORA</h2>
+                <p style="font-family: var(--font-sub); letter-spacing: 4px; color: var(--text-muted); font-size: 0.95rem; margin-top: 1rem;">Baked with love,<br>shared with happiness.</p>
+            </div>
+            <div>
+                <h3 class="footer-heading">Contact</h3>
+                <ul class="footer-links">
+                    <li><p style="margin: 0; color: var(--text-muted); font-weight: 300;">Hubballi, Karnataka</p></li>
+                    <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                    <li><a href="mailto:orders@riora.com">orders@riora.com</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="#story">Our Story</a></li>
+                    <li><a href="#menu">The Grand Menu</a></li>
+                    <li><a href="#bespoke">Bespoke Orders</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="footer-heading">Social</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 RIORA PREMIUM CLOUD KITCHEN. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Sticky Navbar
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+
+            // Custom Cursor (Only for non-touch devices)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const dot = document.getElementById('cursor-dot');
+                const outline = document.getElementById('cursor-outline');
+                
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let outlineX = mouseX;
+                let outlineY = mouseY;
+                
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX; mouseY = e.clientY;
+                    dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+                });
+                
+                const animateCursor = () => {
+                    let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+                    outlineX += distX * 0.15; outlineY += distY * 0.15;
+                    outline.style.left = outlineX + 'px'; outline.style.top = outlineY + 'px';
+                    requestAnimationFrame(animateCursor);
+                };
+                animateCursor();
+
+                const interactables = document.querySelectorAll('a, button, .btn-outline, .menu-item');
+                interactables.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        outline.style.width = '70px'; outline.style.height = '70px';
+                        outline.style.backgroundColor = 'rgba(242, 199, 146, 0.1)';
+                        outline.style.borderColor = 'transparent';
+                        dot.style.width = '16px'; dot.style.height = '16px';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        outline.style.width = '40px'; outline.style.height = '40px';
+                        outline.style.backgroundColor = 'transparent';
+                        outline.style.borderColor = 'rgba(242, 199, 146, 0.4)';
+                        dot.style.width = '28px'; dot.style.height = '28px';
+                    });
+                });
+            }
+
+            // Scroll Reveal Animation
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - 100) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+
+            // Parallax Images
+            const parallaxImgs = document.querySelectorAll('.parallax-img');
+            window.addEventListener('scroll', () => {
+                let scrolled = window.pageYOffset;
+                parallaxImgs.forEach(img => {
+                    if(img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom > 0) {
+                         img.style.transform = `translateY(${scrolled * 0.05}px)`;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
